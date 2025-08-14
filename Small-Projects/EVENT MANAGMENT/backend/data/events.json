@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1755113588258",
+    "title": "asfdds",
+    "description": "dasdsad",
+    "date": "2025-08-29",
+    "time": "04:02",
+    "location": "Kolkata",
+    "capacity": 23,
+    "category": "Workshop",
+    "isPublic": true,
+    "organizerId": "1755113567708",
+    "organizerEmail": "organizer1@demo.com",
+    "createdAt": "2025-08-13T19:33:08.258Z",
+    "registeredAttendees": 0,
+    "status": "active"
+  },
+  {
+    "id": "1755114150074",
+    "title": "rwerew",
+    "description": "rwerewr",
+    "date": "2025-08-22",
+    "time": "01:16",
+    "location": "resrs",
+    "capacity": 45,
+    "category": "Arts & Culture",
+    "isPublic": true,
+    "organizerId": "1755111369373",
+    "organizerEmail": "sayan2@gmail.com",
+    "createdAt": "2025-08-13T19:42:30.074Z",
+    "registeredAttendees": 0,
+    "status": "active"
+  }
+]
