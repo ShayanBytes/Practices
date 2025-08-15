@@ -71,5 +71,34 @@
       ]
     },
     "createdAt": "2025-08-13T19:32:47.708Z"
+  },
+  {
+    "id": "1755177134984",
+    "name": "Sayan Mondal",
+    "email": "nknvlkdsvfld@gmail.com",
+    "password": "$2a$10$UVVerjMCI1uWigfj9Uimx.WC0ej2ITCisIFOv4peHUyaz7FQifLbG",
+    "role": "attendee",
+    "profile": {
+      "interests": [
+        "Arts"
+      ],
+      "location": "Sanfrancisco"
+    },
+    "createdAt": "2025-08-14T13:12:14.984Z"
+  },
+  {
+    "id": "1755177625786",
+    "name": "Sayan Mondal",
+    "email": "sayan1@gmail.com",
+    "password": "$2a$10$rGdwy/wyvfE69ZGuCRm0zeSb0ygSP2VMu6y5gA.m/ccwZNOBDvN5O",
+    "role": "organizer",
+    "profile": {
+      "organizationName": "ShayanCorp",
+      "contactInfo": "fdsfs",
+      "eventTypes": [
+        "Conference"
+      ]
+    },
+    "createdAt": "2025-08-14T13:20:25.786Z"
   }
 ]

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spider-Man 3D - Simple Version</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(
+          135deg,
+          #0c1445 0%,
+          #1e3d72 50%,
+          #2a5298 100%
+        );
+        overflow: hidden;
+        font-family: "Arial", sans-serif;
+      }
+
+      #gameCanvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #loadingScreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+          45deg,
+          #000428 0%,
+          #004e92 50%,
+          #000428 100%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        color: white;
+        text-align: center;
+      }
+
+      .spider-logo {
+        font-size: 80px;
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .game-title {
+        font-size: 48px;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .loading-text {
+        font-size: 18px;
+        margin-top: 20px;
+      }
+
+      #startButton {
+        margin-top: 30px;
+        padding: 15px 30px;
+        font-size: 20px;
+        background: #dc143c;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      #startButton:hover {
+        background: #b71c1c;
+      }
+
+      #hud {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        color: white;
+        font-size: 16px;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+      <div class="spider-logo">🕷️</div>
+      <h1 class="game-title">SPIDER-MAN 3D</h1>
+      <div class="loading-text">Simple Version</div>
+      <button id="startButton">START GAME</button>
+    </div>
+
+    <!-- Game Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- HUD -->
+    <div id="hud" style="display: none">
+      <div>Health: <span id="health">100</span></div>
+      <div>Web Fluid: <span id="webFluid">100</span></div>
+      <div>Height: <span id="height">0</span>m</div>
+      <div>Press WASD to move, Space to jump</div>
+    </div>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+      console.log("🕷️ Starting Simple Spider-Man Game");
+
+      class SimpleSpiderManGame {
+        constructor() {
+          this.scene = null;
+          this.camera = null;
+          this.renderer = null;
+          this.player = null;
+          this.buildings = [];
+          this.keys = {};
+
+          this.playerData = {
+            health: 100,
+            webFluid: 100,
+            position: { x: 0, y: 10, z: 0 },
+            velocity: { x: 0, y: 0, z: 0 },
+          };
+
+          this.init();
+        }
+
+        init() {
+          console.log("🎨 Initializing game...");
+
+          if (typeof THREE === "undefined") {
+            console.error("Three.js not loaded!");
+            return;
+          }
+
+          this.setupRenderer();
+          this.setupScene();
+          this.setupCamera();
+          this.setupLighting();
+          this.createPlayer();
+          this.createEnvironment();
+          this.setupControls();
+
+          console.log("✅ Game initialized successfully!");
+        }
+
+        setupRenderer() {
+          const canvas = document.getElementById("gameCanvas");
+          this.renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            antialias: true,
+          });
+          this.renderer.setSize(window.innerWidth, window.innerHeight);
+          this.renderer.setClearColor(0x87ceeb, 1); // Sky blue
+          this.renderer.shadowMap.enabled = true;
+          this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        }
+
+        setupScene() {
+          this.scene = new THREE.Scene();
+          this.scene.fog = new THREE.Fog(0x87ceeb, 50, 200);
+        }
+
+        setupCamera() {
+          this.camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+          );
+          this.camera.position.set(0, 15, 20);
+          this.camera.lookAt(0, 10, 0);
+        }
+
+        setupLighting() {
+          // Ambient light
+          const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+          this.scene.add(ambientLight);
+
+          // Directional light (sun)
+          const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+          directionalLight.position.set(50, 100, 50);
+          directionalLight.castShadow = true;
+          directionalLight.shadow.mapSize.width = 2048;
+          directionalLight.shadow.mapSize.height = 2048;
+          directionalLight.shadow.camera.near = 0.5;
+          directionalLight.shadow.camera.far = 500;
+          directionalLight.shadow.camera.left = -100;
+          directionalLight.shadow.camera.right = 100;
+          directionalLight.shadow.camera.top = 100;
+          directionalLight.shadow.camera.bottom = -100;
+          this.scene.add(directionalLight);
+        }
+
+        createPlayer() {
+          // Simple player (red cube representing Spider-Man)
+          const geometry = new THREE.BoxGeometry(1, 2, 1);
+          const material = new THREE.MeshLambertMaterial({ color: 0xdc143c });
+          this.player = new THREE.Mesh(geometry, material);
+          this.player.position.set(0, 10, 0);
+          this.player.castShadow = true;
+          this.scene.add(this.player);
+        }
+
+        createEnvironment() {
+          // Ground
+          const groundGeometry = new THREE.PlaneGeometry(200, 200);
+          const groundMaterial = new THREE.MeshLambertMaterial({
+            color: 0x228b22,
+          });
+          const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+          ground.rotation.x = -Math.PI / 2;
+          ground.receiveShadow = true;
+          this.scene.add(ground);
+
+          // Buildings
+          for (let i = 0; i < 20; i++) {
+            const height = Math.random() * 30 + 10;
+            const buildingGeometry = new THREE.BoxGeometry(8, height, 8);
+            const buildingMaterial = new THREE.MeshLambertMaterial({
+              color: new THREE.Color().setHSL(
+                0.6,
+                0.3,
+                Math.random() * 0.3 + 0.4
+              ),
+            });
+            const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
+
+            building.position.x = (Math.random() - 0.5) * 150;
+            building.position.y = height / 2;
+            building.position.z = (Math.random() - 0.5) * 150;
+            building.castShadow = true;
+            building.receiveShadow = true;
+
+            this.scene.add(building);
+            this.buildings.push(building);
+          }
+        }
+
+        setupControls() {
+          document.addEventListener(
+            "keydown",
+            (e) => (this.keys[e.code] = true)
+          );
+          document.addEventListener(
+            "keyup",
+            (e) => (this.keys[e.code] = false)
+          );
+          window.addEventListener("resize", () => this.onWindowResize());
+        }
+
+        onWindowResize() {
+          this.camera.aspect = window.innerWidth / window.innerHeight;
+          this.camera.updateProjectionMatrix();
+          this.renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        updatePlayer() {
+          const speed = 0.2;
+          const jumpPower = 0.8;
+          const gravity = -0.02;
+
+          // Movement
+          if (this.keys["KeyW"]) this.playerData.velocity.z -= speed;
+          if (this.keys["KeyS"]) this.playerData.velocity.z += speed;
+          if (this.keys["KeyA"]) this.playerData.velocity.x -= speed;
+          if (this.keys["KeyD"]) this.playerData.velocity.x += speed;
+
+          // Jump
+          if (this.keys["Space"] && this.player.position.y <= 1.1) {
+            this.playerData.velocity.y = jumpPower;
+          }
+
+          // Apply gravity
+          this.playerData.velocity.y += gravity;
+
+          // Apply velocity
+          this.player.position.x += this.playerData.velocity.x;
+          this.player.position.y += this.playerData.velocity.y;
+          this.player.position.z += this.playerData.velocity.z;
+
+          // Ground collision
+          if (this.player.position.y <= 1) {
+            this.player.position.y = 1;
+            this.playerData.velocity.y = 0;
+          }
+
+          // Friction
+          this.playerData.velocity.x *= 0.9;
+          this.playerData.velocity.z *= 0.9;
+
+          // Update HUD
+          document.getElementById("height").textContent = Math.max(
+            0,
+            Math.round(this.player.position.y - 1)
+          );
+        }
+
+        updateCamera() {
+          // Follow player
+          const targetX = this.player.position.x;
+          const targetY = this.player.position.y + 10;
+          const targetZ = this.player.position.z + 15;
+
+          this.camera.position.x += (targetX - this.camera.position.x) * 0.1;
+          this.camera.position.y += (targetY - this.camera.position.y) * 0.1;
+          this.camera.position.z += (targetZ - this.camera.position.z) * 0.1;
+
+          this.camera.lookAt(this.player.position);
+        }
+
+        animate() {
+          requestAnimationFrame(() => this.animate());
+
+          this.updatePlayer();
+          this.updateCamera();
+          this.renderer.render(this.scene, this.camera);
+        }
+
+        start() {
+          console.log("🚀 Starting game!");
+          document.getElementById("loadingScreen").style.display = "none";
+          document.getElementById("hud").style.display = "block";
+          this.animate();
+        }
+      }
+
+      // Initialize game when page loads
+      let game;
+
+      document.getElementById("startButton").addEventListener("click", () => {
+        try {
+          game = new SimpleSpiderManGame();
+          game.start();
+        } catch (error) {
+          console.error("Failed to start game:", error);
+          alert("Failed to start game: " + error.message);
+        }
+      });
+
+      console.log("✅ Game ready to start!");
+    </script>
+  </body>
+</html>
