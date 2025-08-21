@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Clean Premium Styles - Less is More */
+.btn {
+  @apply px-5 py-2.5 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-500;
+}
+
+.btn-secondary {
+  @apply bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 focus:ring-slate-500;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+.form-input {
+  @apply w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 transition-colors duration-200 bg-white text-slate-900;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-slate-700 mb-2;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-sm border border-slate-200 p-6;
+}
+
+.navbar {
+  @apply bg-white shadow-sm border-b border-slate-200;
+}
+
+/* Premium Typography */
+.heading-xl {
+  @apply text-3xl font-semibold text-slate-900 leading-tight;
+}
+
+.heading-lg {
+  @apply text-2xl font-semibold text-slate-900 leading-tight;
+}
+
+.heading-md {
+  @apply text-xl font-medium text-slate-900 leading-tight;
+}
+
+.text-body {
+  @apply text-base text-slate-600 leading-relaxed;
+}
+
+.text-small {
+  @apply text-sm text-slate-600;
+}
+
+.text-muted {
+  @apply text-slate-500;
+}
+
+/* Layout */
+.container-clean {
+  @apply max-w-6xl mx-auto px-6;
+}
+
+.section-clean {
+  @apply py-12;
+}
+
+/* Clean Form Styles */
+.form-container {
+  @apply max-w-md mx-auto bg-white rounded-lg shadow-sm border border-slate-200 p-8;
+}
+
+.form-group {
+  @apply mb-5;
+}
+
+/* Navigation Clean */
+.nav-link {
+  @apply text-slate-600 hover:text-slate-900 font-medium transition-colors duration-200;
+}
+
+/* Status Indicators */
+.status-success {
+  @apply text-green-700 bg-green-50 border border-green-200 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.status-warning {
+  @apply text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.status-error {
+  @apply text-red-700 bg-red-50 border border-red-200 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+/* Clean Tables */
+.table-clean {
+  @apply w-full bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden;
+}
+
+.table-clean th {
+  @apply bg-slate-50 px-6 py-4 text-left text-sm font-semibold text-slate-700 border-b border-slate-200;
+}
+
+.table-clean td {
+  @apply px-6 py-4 text-slate-600 border-b border-slate-100;
+}
+
+.table-clean tr:last-child td {
+  @apply border-b-0;
+}
+
+/* Focus States */
+.focus-clean:focus {
+  @apply outline-none ring-1 ring-slate-500 ring-offset-1;
+}
