@@ -30,7 +30,7 @@ const CreateEventPage = () => {
     e.preventDefault();
     setError("");
 
-    // Validation
+    
     if (new Date(formData.date) < new Date()) {
       setError("Event date cannot be in the past");
       return;

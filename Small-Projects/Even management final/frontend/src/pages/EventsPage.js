@@ -44,7 +44,7 @@ const EventsPage = () => {
   const handleRegister = async (eventId) => {
     try {
       await eventService.registerForEvent(eventId);
-      fetchEvents(pagination.currentPage); // Refresh events
+      fetchEvents(pagination.currentPage); 
     } catch (err) {
       alert(err.response?.data?.message || "Failed to register for event");
     }
@@ -53,7 +53,7 @@ const EventsPage = () => {
   const handleUnregister = async (eventId) => {
     try {
       await eventService.unregisterFromEvent(eventId);
-      fetchEvents(pagination.currentPage); // Refresh events
+      fetchEvents(pagination.currentPage); 
     } catch (err) {
       alert(err.response?.data?.message || "Failed to unregister from event");
     }
@@ -77,7 +77,7 @@ const EventsPage = () => {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">All Events</h1>
 
-          {/* Results Summary */}
+          {}
           <div className="mb-4">
             <p className="text-gray-600">
               Showing {events.length} of {pagination.total} events
@@ -91,7 +91,7 @@ const EventsPage = () => {
           </div>
         )}
 
-        {/* Events Grid */}
+        {}
         {events.length === 0 ? (
           <div className="text-center py-12">
             <div className="text-gray-400 text-6xl mb-4">🎭</div>
@@ -116,7 +116,7 @@ const EventsPage = () => {
               ))}
             </div>
 
-            {/* Pagination */}
+            {}
             {pagination.totalPages > 1 && (
               <div className="flex justify-center mt-8 space-x-2">
                 <button

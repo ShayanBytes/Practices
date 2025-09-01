@@ -209,7 +209,7 @@ const EventRegistrationsPage = () => {
               </table>
             </div>
 
-            {/* Export Options */}
+            
             <div className="mt-6 pt-4 border-t border-gray-200">
               <div className="flex justify-between items-center">
                 <p className="text-sm text-gray-600">
@@ -217,7 +217,7 @@ const EventRegistrationsPage = () => {
                 </p>
                 <button
                   onClick={() => {
-                    // Simple CSV export
+                   
                     const csvContent = [
                       ["Name", "Email", "Location", "Interests", "Registered"],
                       ...registrations.attendees.map((attendee) => [

@@ -6,7 +6,7 @@ const { auth, organizer, attendee } = require("../middleware/auth");
 
 const router = express.Router();
 
-// Get all public events
+
 router.get("/", async (req, res) => {
   try {
     const { page = 1, limit = 10, eventType, location, date } = req.query;
@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get event by ID
+
 router.get("/:id", async (req, res) => {
   try {
     const event = await Event.findById(req.params.id)
@@ -58,7 +58,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Create event (organizer only)
+
 router.post(
   "/",
   [
@@ -114,7 +114,7 @@ router.post(
   }
 );
 
-// Update event (organizer only, own events)
+
 router.put("/:id", [auth, organizer], async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -144,7 +144,7 @@ router.put("/:id", [auth, organizer], async (req, res) => {
   }
 });
 
-// Delete event (organizer only, own events)
+
 router.delete("/:id", [auth, organizer], async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -163,7 +163,7 @@ router.delete("/:id", [auth, organizer], async (req, res) => {
 
     await Event.findByIdAndDelete(req.params.id);
 
-    // Remove event from users' registered events
+   
     await User.updateMany(
       { registeredEvents: req.params.id },
       { $pull: { registeredEvents: req.params.id } }
@@ -175,7 +175,7 @@ router.delete("/:id", [auth, organizer], async (req, res) => {
   }
 });
 
-// Register for event (attendee only)
+
 router.post("/:id/register", [auth, attendee], async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -188,7 +188,7 @@ router.post("/:id/register", [auth, attendee], async (req, res) => {
       return res.status(400).json({ message: "Event is full" });
     }
 
-    // Check if user is already registered
+   
     const isRegistered = event.attendees.some(
       (attendee) => attendee.user.toString() === req.user._id.toString()
     );
@@ -199,11 +199,11 @@ router.post("/:id/register", [auth, attendee], async (req, res) => {
         .json({ message: "You are already registered for this event" });
     }
 
-    // Add user to event attendees
+    
     event.attendees.push({ user: req.user._id });
     await event.updateAttendeesCount();
 
-    // Add event to user's registered events
+    
     await User.findByIdAndUpdate(req.user._id, {
       $addToSet: { registeredEvents: event._id },
     });
@@ -214,7 +214,7 @@ router.post("/:id/register", [auth, attendee], async (req, res) => {
   }
 });
 
-// Unregister from event (attendee only)
+
 router.post("/:id/unregister", [auth, attendee], async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -223,13 +223,13 @@ router.post("/:id/unregister", [auth, attendee], async (req, res) => {
       return res.status(404).json({ message: "Event not found" });
     }
 
-    // Remove user from event attendees
+   
     event.attendees = event.attendees.filter(
       (attendee) => attendee.user.toString() !== req.user._id.toString()
     );
     await event.updateAttendeesCount();
 
-    // Remove event from user's registered events
+
     await User.findByIdAndUpdate(req.user._id, {
       $pull: { registeredEvents: event._id },
     });
@@ -240,7 +240,6 @@ router.post("/:id/unregister", [auth, attendee], async (req, res) => {
   }
 });
 
-// Get organizer's events
 router.get("/organizer/my-events", [auth, organizer], async (req, res) => {
   try {
     const events = await Event.find({ organizer: req.user._id })
@@ -253,7 +252,7 @@ router.get("/organizer/my-events", [auth, organizer], async (req, res) => {
   }
 });
 
-// Get event registrations (organizer only, own events)
+
 router.get("/:id/registrations", [auth, organizer], async (req, res) => {
   try {
     const event = await Event.findById(req.params.id).populate(

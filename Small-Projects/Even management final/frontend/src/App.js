@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
-// Components
+
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-// Working Pages
+
 import WorkingLoginPage from "./pages/WorkingLoginPage";
 import SimpleRegisterPage from "./pages/SimpleRegisterPage";
 import HomePage from "./pages/HomePage";
@@ -20,15 +20,15 @@ import ProfilePage from "./pages/ProfilePage";
 import EventsPage from "./pages/EventsPage";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
 
-// Organizer Pages
+
 import OrganizerEventsPage from "./pages/organizer/OrganizerEventsPage";
 import CreateEventPage from "./pages/organizer/CreateEventPage";
 import EventRegistrationsPage from "./pages/organizer/EventRegistrationsPage";
 
-// Attendee Pages
+
 import AttendeeRegisteredEventsPage from "./pages/attendee/AttendeeRegisteredEventsPage";
 
-// Render Navbar on all routes except login/register
+
 const NavbarRenderer = () => {
   const location = useLocation();
   const hideOn = ["/login", "/register", "/"];
@@ -43,12 +43,12 @@ function App() {
         <div className="App">
           <NavbarRenderer />
           <Routes>
-            {/* Public Routes - Login/Register First */}
+           
             <Route path="/" element={<WorkingLoginPage />} />
             <Route path="/login" element={<WorkingLoginPage />} />
             <Route path="/register" element={<SimpleRegisterPage />} />
 
-            {/* Protected Routes - After Authentication */}
+           
             <Route
               path="/home"
               element={
@@ -84,7 +84,7 @@ function App() {
               }
             />
 
-            {/* Organizer Only Routes */}
+          
             <Route
               path="/organizer/events"
               element={
@@ -110,7 +110,7 @@ function App() {
               }
             />
 
-            {/* Attendee Only Routes */}
+           
             <Route
               path="/attendee/registered-events"
               element={
@@ -120,7 +120,7 @@ function App() {
               }
             />
 
-            {/* 404 Route */}
+         
             <Route
               path="*"
               element={

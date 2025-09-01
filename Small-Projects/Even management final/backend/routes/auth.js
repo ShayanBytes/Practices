@@ -6,7 +6,7 @@ const { auth } = require("../middleware/auth");
 
 const router = express.Router();
 
-// Register user
+
 router.post(
   "/register",
   [
@@ -41,7 +41,7 @@ router.post(
         location,
       } = req.body;
 
-      // Check if user already exists
+     
       const existingUser = await User.findOne({ email });
       if (existingUser) {
         return res
@@ -49,7 +49,7 @@ router.post(
           .json({ message: "User with this email already exists" });
       }
 
-      // Create user object based on role
+      
       const userData = {
         name,
         email,
@@ -69,7 +69,7 @@ router.post(
       const user = new User(userData);
       await user.save();
 
-      // Generate JWT token
+      
       const token = jwt.sign(
         { userId: user._id, role: user.role },
         process.env.JWT_SECRET,
@@ -92,7 +92,7 @@ router.post(
   }
 );
 
-// Login user
+
 router.post(
   "/login",
   [
@@ -108,19 +108,19 @@ router.post(
 
       const { email, password } = req.body;
 
-      // Check if user exists
+     
       const user = await User.findOne({ email });
       if (!user) {
         return res.status(400).json({ message: "Invalid credentials" });
       }
 
-      // Check password
+   
       const isMatch = await user.comparePassword(password);
       if (!isMatch) {
         return res.status(400).json({ message: "Invalid credentials" });
       }
 
-      // Generate JWT token
+    
       const token = jwt.sign(
         { userId: user._id, role: user.role },
         process.env.JWT_SECRET,
@@ -143,7 +143,6 @@ router.post(
   }
 );
 
-// Get current user
 router.get("/me", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user._id)

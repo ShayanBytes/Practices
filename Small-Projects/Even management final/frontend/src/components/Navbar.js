@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className="navbar px-6 py-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Clean Logo */}
+        {}
         <Link
           to={isAuthenticated ? "/home" : "/"}
           className="flex items-center space-x-3"
@@ -25,7 +25,7 @@ const Navbar = () => {
           <span className="text-xl font-semibold text-slate-900">EventHub</span>
         </Link>
 
-        {/* Clean Navigation */}
+        {}
         <div className="flex items-center space-x-6">
           {isAuthenticated ? (
             <>
@@ -54,7 +54,7 @@ const Navbar = () => {
                 Profile
               </Link>
 
-              {/* Clean User Section */}
+              {}
               <div className="flex items-center space-x-3 pl-6 border-l border-slate-200">
                 <div className="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center">
                   <span className="text-xs font-medium text-slate-600">

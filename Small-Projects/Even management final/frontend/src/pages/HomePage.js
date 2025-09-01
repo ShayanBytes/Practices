@@ -6,9 +6,9 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Image Banner Section */}
+      {}
       <div className="relative w-full h-96 overflow-hidden group cursor-pointer">
-        {/* Background Image (JPG) - Base layer with blur effect on hover */}
+        {}
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-1500 ease-in-out group-hover:blur-sm"
           style={{
@@ -19,7 +19,7 @@ const HomePage = () => {
           }}
         ></div>
 
-        {/* Text Layer - Top layer (always visible) */}
+        {}
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{ zIndex: 3 }}
@@ -33,9 +33,9 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Clean Statistics Grid */}
+      {}
       <div className="container-clean py-16">
-        {/* Meet the Creators Section */}
+        {}
         <div className="mb-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-semibold text-slate-900 mb-4">
@@ -48,7 +48,7 @@ const HomePage = () => {
           </div>
 
           <div className="flex justify-center items-center space-x-12 flex-wrap gap-y-8">
-            {/* Creator 1 */}
+            {}
             <div className="text-center">
               <img
                 src="-iqsmzo.jpg"
@@ -58,7 +58,7 @@ const HomePage = () => {
               <p className="text-sm font-medium text-slate-900">SAYAN MONDAL</p>
             </div>
 
-            {/* Creator 2 */}
+            {}
             <div className="text-center">
               <img
                 src="Kaushik.jpeg"
@@ -68,7 +68,7 @@ const HomePage = () => {
               <p className="text-sm font-medium text-slate-900">KAUSHIK DAS</p>
             </div>
 
-            {/* Creator 3 */}
+            {}
             <div className="text-center">
               <img
                 src="https://via.placeholder.com/120x120/666666/FFFFFF?text=Creator+3"
@@ -80,7 +80,7 @@ const HomePage = () => {
               </p>
             </div>
 
-            {/* Creator 4 */}
+            {}
             <div className="text-center">
               <img
                 src="Sahin.jpeg"
@@ -92,7 +92,7 @@ const HomePage = () => {
               </p>
             </div>
 
-            {/* Creator 5 */}
+            {}
             <div className="text-center">
               <img
                 src="Sreejani.jpeg"
@@ -106,9 +106,9 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Information Sections */}
+        {}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
-          {/* For Organizers */}
+          {}
           <div>
             <h3 className="text-2xl font-semibold text-slate-900 mb-6">
               For Event Organizers
@@ -163,7 +163,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          {/* For Attendees */}
+          {}
           <div>
             <h3 className="text-2xl font-semibold text-slate-900 mb-6">
               For Event Attendees
@@ -219,7 +219,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Project Details Section - Full Viewport Width */}
+      {}
       <div className="w-screen bg-black text-white py-16">
         <div className="max-w-6xl mx-auto text-center px-6">
           <h2 className="text-3xl font-light tracking-wide mb-8">

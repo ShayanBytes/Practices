@@ -8,7 +8,7 @@ const DashboardPage = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="container-clean section-clean">
-        {/* Clean Welcome Section */}
+        {}
         <div className="mb-12">
           <h1 className="heading-xl mb-3">Welcome back, {user.name}</h1>
           <p className="text-body">
@@ -16,9 +16,9 @@ const DashboardPage = () => {
           </p>
         </div>
 
-        {/* Clean Action Grid */}
+        {}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {/* Browse Events */}
+          {}
           <Link to="/events" className="group">
             <div className="card hover:shadow-md transition-shadow duration-200">
               <div className="flex items-start space-x-4">
@@ -47,7 +47,7 @@ const DashboardPage = () => {
             </div>
           </Link>
 
-          {/* Organizer Actions */}
+          {}
           {isOrganizer && (
             <>
               <Link to="/organizer/create-event" className="group">
@@ -104,7 +104,7 @@ const DashboardPage = () => {
             </>
           )}
 
-          {/* Attendee Actions */}
+          {}
           {isAttendee && (
             <Link to="/attendee/registered-events" className="group">
               <div className="card hover:shadow-md transition-shadow duration-200">
@@ -133,7 +133,7 @@ const DashboardPage = () => {
             </Link>
           )}
 
-          {/* Profile */}
+          {}
           <Link to="/profile" className="group">
             <div className="card hover:shadow-md transition-shadow duration-200">
               <div className="flex items-start space-x-4">
@@ -161,7 +161,7 @@ const DashboardPage = () => {
           </Link>
         </div>
 
-        {/* Clean Stats Section */}
+        {}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="card text-center">
             <div className="text-2xl font-semibold text-slate-900 mb-1">

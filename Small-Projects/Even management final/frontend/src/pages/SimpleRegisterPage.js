@@ -9,14 +9,14 @@ const SimpleRegisterPage = () => {
     email: "",
     password: "",
     role: "attendee",
-    // Organizer fields
+  
     organizationName: "",
     contactInfo: {
       phone: "",
       website: "",
     },
     eventTypes: [],
-    // Attendee fields
+   
     interests: [],
     location: "",
   });
@@ -48,7 +48,7 @@ const SimpleRegisterPage = () => {
     setLoading(true);
 
     try {
-      // Prepare data based on role
+     
       const registrationData = {
         name: formData.name,
         email: formData.email,
@@ -59,7 +59,7 @@ const SimpleRegisterPage = () => {
       if (formData.role === "organizer") {
         registrationData.organizationName = formData.organizationName;
         registrationData.contactInfo = formData.contactInfo;
-        // Only include eventTypes if they have values
+       
         if (formData.eventTypes.length > 0) {
           registrationData.eventTypes = formData.eventTypes;
         }
@@ -67,7 +67,7 @@ const SimpleRegisterPage = () => {
         if (formData.location) {
           registrationData.location = formData.location;
         }
-        // Only include interests if they have values
+       
         if (formData.interests.length > 0) {
           registrationData.interests = formData.interests;
         }
@@ -158,7 +158,7 @@ const SimpleRegisterPage = () => {
               </select>
             </div>
 
-            {/* Organizer specific fields */}
+            {}
             {formData.role === "organizer" && (
               <>
                 <div className="form-group">
@@ -200,7 +200,7 @@ const SimpleRegisterPage = () => {
               </>
             )}
 
-            {/* Attendee specific fields */}
+            {}
             {formData.role === "attendee" && (
               <>
                 <div className="form-group">

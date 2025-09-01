@@ -68,7 +68,7 @@ const eventSchema = new mongoose.Schema(
   }
 );
 
-// Update current attendees count when attendees array changes
+
 eventSchema.methods.updateAttendeesCount = function () {
   this.currentAttendees = this.attendees.length;
   return this.save();
