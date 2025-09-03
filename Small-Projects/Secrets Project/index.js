@@ -11,3 +11,30 @@
 // secret and the username of the secret.
 
 // 6. Listen on your predefined port and start the server.
+import express from "express";
+import axios from "axios";
+
+const app = express();
+const port = 3000;
+app.use(express.static("public"));
+
+// Tell Express to use EJS for rendering templates
+app.set("view engine", "ejs");
+
+app.get("/", async (req, res) => {
+  try {
+    const result = await axios.get("https://secrets-api.appbrewery.com/random");
+    // Render the EJS template and pass the data
+    res.render("index.ejs", {
+      secret: result.data.secret,
+      user: result.data.username,
+    });
+  } catch (error) {
+    console.log(error.response.data);
+    res.status(500);
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
